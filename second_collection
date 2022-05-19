@@ -308,6 +308,14 @@
 							"// 19. Передать в окружение переменную age\r",
 							"// 20. Передать в окружение переменную salary\r",
 							"// 21. Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.\r",
+							"// let salary_4 = response.salary\r",
+							"console.log(response)\r",
+							"// for (int i = 0; i &lt; salary_4.length; i++) {\r",
+							"//     System.out.println(salary_4[i]);\r",
+							"// }\r",
+							"// for (int salary1q : salary_4) {\r",
+							"//     System.out.println(salary1q);\r",
+							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -318,7 +326,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://162.55.220.72:5005/object_info_4?name=Mari&age=27&salary=2000",
+					"raw": "http://162.55.220.72:5005/object_info_4?name={{name}}&age={{age}}&salary={{salary}}",
 					"protocol": "http",
 					"host": [
 						"162",
@@ -333,16 +341,119 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "Mari"
+							"value": "{{name}}"
 						},
 						{
 							"key": "age",
-							"value": "27"
+							"value": "{{age}}"
 						},
 						{
 							"key": "salary",
-							"value": "2000"
+							"value": "{{salary}}"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Вставить параметр salary из окружения в request\r",
+							"// 2. Вставить параметр age из окружения в age\r",
+							"// 3. Вставить параметр name из окружения в name\r",
+							"// 4. Отправить запрос.\r",
+							"// 5. Статус код 200\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// 6. Спарсить response body в json.\r",
+							"const jsonData = pm.response.json();\r",
+							"// 7. Спарсить request.\r",
+							"let req = request.data\r",
+							"// 8. Проверить, что json response имеет параметр start_qa_salary\r",
+							"pm.test(\"start_qa_salary\", () => {\r",
+							"       pm.environment.set(jsonData.start_qa_salary)\r",
+							"})\r",
+							"// 9. Проверить, что json response имеет параметр qa_salary_after_6_months\r",
+							"pm.test(\"start_qa_salary_6_months\", () => {\r",
+							"       pm.environment.set(jsonData.qa_salary_after_6_months)\r",
+							"})\r",
+							"// 10. Проверить, что json response имеет параметр qa_salary_after_12_months\r",
+							"pm.test(\"qa_salary_after_12_months\", () => {\r",
+							"       pm.environment.set(jsonData.qa_salary_after_12_months)\r",
+							"})\r",
+							"// // 11. Проверить, что json response имеет параметр qa_salary_after_1.5_years\r",
+							"// pm.test(\"qa_salary_after_1.5_years\", () => {\r",
+							"//        pm.environment.set(jsonData.qa_salary_after_12_months)\r",
+							"// })\r",
+							"// // 12. Проверить, что json response имеет параметр qa_salary_after_3.5_years\r",
+							"// pm.test(\"qa_salary_after_3.5_years\", () => {\r",
+							"//        pm.environment.set(jsonData.qa_salary_after_3.5_years)\r",
+							"// })\r",
+							"// 13. Проверить, что json response имеет параметр person\r",
+							"pm.test(\"person\", () => {\r",
+							"       pm.environment.set(jsonData.person)\r",
+							"})\r",
+							"// 14. Проверить, что параметр start_qa_salary равен salary из request (salary забрать из request.)\r",
+							"let req_salary = req.salary\r",
+							"let start_qa_salary = jsonData.start_qa_salary\r",
+							"\r",
+							"pm.test(\"start_qa_salary\", () => {\r",
+							"     pm.expect(String(start_qa_salary)).to.eql(String(req_salary))\r",
+							"})\r",
+							"// 15. Проверить, что параметр qa_salary_after_6_months равен salary*2 из request (salary забрать из request.)\r",
+							"// 16. Проверить, что параметр qa_salary_after_12_months равен salary*2.7 из request (salary забрать из request.)\r",
+							"// 17. Проверить, что параметр qa_salary_after_1.5_year равен salary*3.3 из request (salary забрать из request.)\r",
+							"// 18. Проверить, что параметр qa_salary_after_3.5_years равен salary*3.8 из request (salary забрать из request.)\r",
+							"// 19. Проверить, что в параметре person, 1-й элемент из u_name равен salary из request (salary забрать из request.)\r",
+							"// 20. Проверить, что что параметр u_age равен age из request (age забрать из request.)\r",
+							"// 21. Проверить, что параметр u_salary_5_years равен salary*4.2 из request (salary забрать из request.)\r",
+							"// 22. ***Написать цикл который выведет в консоль по порядку элементы списка из параметра person."
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "{{age}}",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "{{salary}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5007/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5007",
+					"path": [
+						"user_info_2"
 					]
 				}
 			},
