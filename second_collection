@@ -308,14 +308,7 @@
 							"// 19. Передать в окружение переменную age\r",
 							"// 20. Передать в окружение переменную salary\r",
 							"// 21. Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.\r",
-							"// let salary_4 = response.salary\r",
-							"console.log(response)\r",
-							"// for (int i = 0; i &lt; salary_4.length; i++) {\r",
-							"//     System.out.println(salary_4[i]);\r",
-							"// }\r",
-							"// for (int salary1q : salary_4) {\r",
-							"//     System.out.println(salary1q);\r",
-							"\r",
+							"console.log(Object.values(salary))\r",
 							""
 						],
 						"type": "text/javascript"
